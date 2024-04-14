@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from FastapiInstagramClone.app.router.user import router as user_router
-from FastapiInstagramClone.app.router.auth import router as auth_router
+from ..app.router.user import router as user_router
+from ..app.router.auth import router as auth_router
 app = FastAPI(title="Instagram")
 
 
