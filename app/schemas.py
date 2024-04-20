@@ -1,5 +1,6 @@
-from pydantic import BaseModel, EmailStr
 from datetime import datetime
+
+from pydantic import BaseModel, EmailStr
 
 
 class UserCreate(BaseModel):
@@ -13,7 +14,7 @@ class UserOutput(BaseModel):
     created: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class Token(BaseModel):
@@ -21,5 +22,36 @@ class Token(BaseModel):
     token_type: str
 
 
-class TokenDate(BaseModel):
-    email: EmailStr
+class TokenData(BaseModel):
+    user_id: int
+
+
+# post
+class PostOutput(BaseModel):
+    id: int
+    title: str
+    content: str
+    created: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class PostCreate(BaseModel):
+    title: str
+    content: str
+
+
+class LikeSchama(BaseModel):
+    post_id: int
+
+
+class CommentSchema(BaseModel):
+    post_id: int
+    content: str
+
+
+class PostDetail(PostCreate):
+    id: int
+    comments: list[CommentSchema]
+    # user: UserOutput
